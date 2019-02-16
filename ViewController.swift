@@ -14,6 +14,7 @@ class ViewController: UIViewController {
    
     
     var randomBallNumber: Int = 0
+    var previousNum: Int = 0
     
     let array = ["ball1", "ball2", "ball3", "ball4", "ball5"]
     
@@ -21,6 +22,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         randomBallNumber = Int.random(in: 0 ... 4)
         imageView.image = UIImage(named: array[randomBallNumber])
+        print(randomBallNumber)
+        previousNum = randomBallNumber
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,8 +38,17 @@ class ViewController: UIViewController {
     
     func newBallImage() {
         randomBallNumber = Int.random(in: 0 ... 4)
+        print(previousNum)
+        
+        while previousNum == randomBallNumber {
+            randomBallNumber = Int.random(in: 0 ... 4)
+        }
+       
         imageView.image = UIImage(named: array[randomBallNumber])
         print(randomBallNumber)
+        
+        
+        previousNum = randomBallNumber
     }
     
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
